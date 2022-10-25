@@ -15,7 +15,7 @@ class TextSearcherController(
         return service.folderPath
     }
 
-    @GetMapping("/")
+    @GetMapping("/files")
     fun getFilesWithWords(@RequestBody request: String): List<String> {
         return service.getFilesWithWords(request)
     }

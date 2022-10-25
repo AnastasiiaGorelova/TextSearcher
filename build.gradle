@@ -56,7 +56,7 @@ node {
     npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
 
     // Set the work directory where node_modules should be located
-    nodeModulesDir = file("${project.projectDir}/src/main/frontend/myreactapp")
+    nodeModulesDir = file("${project.projectDir}/src/main/frontend")
 }
 
 task npmInstallDependencies(type: NpmTask) {
