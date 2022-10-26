@@ -20,10 +20,13 @@ class TextSearcherService(
     }
 
     private fun parseInput(input: String): List<String> {
-        return input.trim().split("[\\s,]+".toRegex())
+        return input.trim().split("[\\s,]+".toRegex()).filter { w -> w.isNotEmpty() }
     }
 
     private fun checkFiles(words: List<String>): List<String> {
+        if (words.isEmpty()) {
+            return emptyList()
+        }
         return File(folderPath).listFiles()!!   //TODO make check for !!
                 .filter { words.stream().allMatch { word -> it.readText().contains(word, true) } }
                 .map { file -> file.name }
