@@ -10,6 +10,6 @@ class ExceptionControllerAdvice {
 
     @ExceptionHandler
     fun handleIllegalStateException(e: SourceFolderException): ResponseEntity<String> {
-        return ResponseEntity(e.message, HttpStatus.NOT_FOUND)
+        return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
     }
 }
