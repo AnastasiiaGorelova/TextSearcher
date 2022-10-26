@@ -9,15 +9,8 @@ import textsearcher.service.TextSearcherService
 class TextSearcherController(
         private val service: TextSearcherService
 ) {
-
-    @GetMapping("/folder")
-    fun getFolderPath(): String {
-        return service.folderPath
-    }
-
     @GetMapping("/files")
-    fun getFilesWithWords(@RequestParam(value = "query") query: String?): List<String> {
-        query?: return emptyList()
+    fun getFilesWithWords(@RequestParam(value = "query") query: String): List<String> {
         return service.getFilesWithWords(query)
     }
 }
