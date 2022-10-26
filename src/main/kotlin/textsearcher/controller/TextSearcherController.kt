@@ -1,7 +1,6 @@
 package textsearcher.controller
 
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import textsearcher.service.TextSearcherService
@@ -17,7 +16,8 @@ class TextSearcherController(
     }
 
     @GetMapping("/files")
-    fun getFilesWithWords(@RequestParam query: String): List<String> {
+    fun getFilesWithWords(@RequestParam(value = "query") query: String?): List<String> {
+        query?: return emptyList()
         return service.getFilesWithWords(query)
     }
 }

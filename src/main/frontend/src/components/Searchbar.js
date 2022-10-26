@@ -15,19 +15,38 @@ const useStyles = makeStyles((theme) => ({
 export default function Searchbar() {
     const paperStyle={padding:'50px 20px', width:1000, margin:"20px auto"}
     const [input, setInput] = useState('')
+    const [files, setFiles] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const classes = useStyles();
 
-    const handleClick=(e)=>{
-        e.preventDefault()
-        console.log(input)
-        fetch(`/files/?query=${input}`, {
-            method:"GET",
-            headers:{"Content-Type":"text/html"}
+
+    const handleClick = async () => {
+        setIsLoading(true);
+    
+        try {
+          const response = await fetch(`/files/?query=${input}`, {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+            },
+          });
+    
+          if (!response.ok) {
+            throw new Error(`Error! status: ${response.status}`);
+          }
+    
+          const result = await response.json();
+    
+          console.log('result is: ', JSON.stringify(result, null, 4));
+    
+          setFiles(result);
+        } catch (err) {
+            console.log(err.message);
+        } finally {
+          setIsLoading(false);
         }
-        ).then(()=>{
-            console.log("Go searching")
-        })
-    }
+      };
+
 
   return (
     <Container>
@@ -43,6 +62,18 @@ export default function Searchbar() {
       </Button>
     </form>
         </Paper>
+        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+        <h1>Files containing these words</h1>
+        </div>
+    <Paper elevation={3} style={paperStyle}>
+
+      {files.map(file=>(
+        <Paper elevation={6} style={{margin:"10px",padding:"15px", textAlign:"center"}} key={file}>
+         {file}
+        </Paper>
+      ))
+    }
+    </Paper>
     </Container>
   );
 }
