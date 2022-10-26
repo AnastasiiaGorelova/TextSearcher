@@ -1,6 +1,9 @@
 #!/bin/bash
 # This script will install dependencies then build TextSearcher application
 
+npm config set legacy-peer-deps true
+npm i
+
 npm install  @material-ui/core
 npm install @material-ui/icons
 
