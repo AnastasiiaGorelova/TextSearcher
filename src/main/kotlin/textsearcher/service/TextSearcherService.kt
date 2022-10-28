@@ -38,24 +38,26 @@ class TextSearcherService(
 
     fun getFilesWithWords(input: String): List<String> {
         val words = parseInput(input)
-        return checkFiles(words)
+        return checkFiles(words, folderPath!!)
     }
 
-    private fun parseInput(input: String): List<String> {
-        return input.trim().split("[\\s,]+".toRegex()).filter { w -> w.isNotEmpty() }
-    }
-
-    private fun checkFiles(words: List<String>): List<String> {
-        if (words.isEmpty()) {
-            return emptyList()
+    companion object {
+        fun parseInput(input: String): List<String> {
+            return input.trim().split("[\\s,]+".toRegex()).filter { w -> w.isNotEmpty() }
         }
-        return try {
-            File(folderPath!!).listFiles()!!
-                    .filter { words.stream().allMatch { word -> it.readText().contains(word, true) } }
-                    .map { file -> file.name }
-                    .toList()
-        } catch (_: Exception) {
-            throw SourceFolderException("Error while reading directory $folderPath")
+
+        fun checkFiles(words: List<String>, folderPath: String): List<String> {
+            if (words.isEmpty()) {
+                return emptyList()
+            }
+            return try {
+                File(folderPath).listFiles()!!
+                        .filter { words.stream().allMatch { word -> it.readText().contains(word, true) } }
+                        .map { file -> file.name }
+                        .toList()
+            } catch (_: Exception) {
+                throw SourceFolderException("Error while reading directory $folderPath")
+            }
         }
     }
 
