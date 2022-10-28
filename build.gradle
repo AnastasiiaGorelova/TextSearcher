@@ -6,6 +6,7 @@ plugins {
     id "org.jetbrains.kotlin.plugin.spring" version "1.7.20"
 
     id "com.github.node-gradle.node" version "3.5.0"
+    id("io.kotest") version "0.3.8"
 }
 
 group = 'com.example'
@@ -19,8 +20,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation("com.ninja-squad:springmockk:3.1.1")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.0")
+    testImplementation("io.kotest:kotest-framework-engine-jvm:5.5.0")
 }
 
 tasks.named('test') {
