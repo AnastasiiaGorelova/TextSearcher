@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class TextSearcherApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    fun contextLoads() {
+    }
 
 }
