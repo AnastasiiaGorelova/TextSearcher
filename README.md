@@ -11,6 +11,7 @@ User enters a set of words using web interface and is returned the names of all 
 ## Run the application
 0. Install JDK 17, Gradle, Node
 1. Create the **permanent** environment variable `SOURCE_FOLDER_PATH` with value of the absolute path to folder.
+   Make sure that `env` sees the environment variable!
 
    (E.g. `SOURCE_FOLDER_PATH={your path to project folder}/src/test/resources/test_data`. There are some files with "Alice in Wonderland" quotes.)
 
