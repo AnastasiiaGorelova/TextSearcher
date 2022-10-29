@@ -19,4 +19,14 @@ User enters a set of words using web interface and is returned the names of all 
 3. Go to [localhost:8080](http://localhost:8080/) 
 
 
+## How it looks like
+
+![example 1](./images/img.png)
+
+
+![example 2](./images/img_1.png)
+
+
+
+
 
